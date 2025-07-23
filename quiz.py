@@ -67,11 +67,12 @@ def on_mouse_down(pos):
 def correctanswer():
     global score, question, timeleft, game_complete
     score +=1
-    if score == 11:
+    if score == 11 and game_over == False:
+
         print("hello")
         
         gamecomplete()
-    if questions:
+    elif questions:
 
         question = split_question()
         timeleft = 10
@@ -86,7 +87,7 @@ def gameover():
     game_over = True
             
 def gamecomplete():
-    global question, timeleft, game_complete
+    global question, timeleft, game_complete, message
     message = "You win."
     question = [message,"-","-","-","-"]
     timeleft = 0
@@ -117,9 +118,9 @@ question = split_question()
 
 def update_timer():
     global timeleft
-    if timeleft:
+    if timeleft and game_complete == False:
         timeleft -=1
-    else:
+    elif game_complete == False:
         gameover()
 clock.schedule_interval(update_timer,1)
 
